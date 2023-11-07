@@ -1,14 +1,13 @@
-.users {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .link {
     text-decoration-line: none;
     color: black;
     font-weight: 500;
     transition: .1s;
+}
+
+.userInfo {
+    list-style-type: none;
+    padding: 0;
 }
 
 .link:hover {

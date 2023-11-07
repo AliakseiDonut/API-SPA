@@ -1,20 +1,16 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import classes from "./Albums.module.css";
+import { useFetch } from "../../useFetch";
 
 function Albums() {
-  const [albums, setAlbums] = useState([]);
+  const link = 'https://jsonplaceholder.typicode.com/albums';
   
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/albums')
-      .then(response => response.json())
-      .then(json => setAlbums(json))
-  },[albums])
+  const albums = useFetch(link);
   
   return (
-    <div className="users">
-      {albums.map(el=><NavLink>{el.title}</NavLink>)}
-    </div>
+    <ul className={classes.albums}>
+      {albums.map(el=><li><NavLink className={classes.link} to={`/albums/${el.id}`}>{el.title}</NavLink></li>)}
+    </ul>
   );
 }
 

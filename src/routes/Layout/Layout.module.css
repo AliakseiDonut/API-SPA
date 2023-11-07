@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+}
+
+.layout {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+header {
+    display: flex;
+    gap: 30px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.61);
+    padding: 15px 0;
+}
+
+main {
+    margin-top: 50px;
+}
+
+.link {
+    text-decoration-line: none;
+    color: black;
+    font-weight: 500;
+    transition: .1s;
+}
+
+.link:hover {
+    color: rgba(0, 0, 0, 0.5); 
+}
+
+.link_active {
+    color: black;
+    font-weight: 500;
+    transition: .1s;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid rgba(0, 0, 0, 0.61);
+    padding: 15px 0;
+    margin-top: 50px;
+}

@@ -1,7 +1,13 @@
-.users {
+.photos {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.photos img {
+    width: 300px;
 }
 
 .link {

@@ -3,6 +3,9 @@ import Users from "./routes/Users/Users";
 import Layout from "./routes/Layout/Layout";
 import Albums from "./routes/Albums/Albums";
 import User from "./routes/User/User";
+import Album from "./routes/Album/Album";
+import NotFound from "./routes/NotFound/NotFound";
+
 
 const router = createBrowserRouter([
   {
@@ -22,10 +25,16 @@ const router = createBrowserRouter([
         element: <User />
       },
       {
-        path: '/albums/:id'
+        path: '/albums/:id',
+        element: <Album />
       }
     ]
-  }
+  },
+  
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ])
 
 function App() {

@@ -1,14 +1,13 @@
-.users {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.notFound h1 {
+    text-align: center;
 }
 
 .link {
-    text-decoration-line: none;
+    text-align: center;
     color: black;
     font-weight: 500;
     transition: .1s;
+    display: block;
 }
 
 .link:hover {

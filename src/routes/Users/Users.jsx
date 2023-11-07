@@ -1,24 +1,15 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import classes from "./Users.module.css";
+import { useFetch } from "../../useFetch";
 
 function Users() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(()=>{
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => setUsers(json))
-  },[])
+  const link = 'https://jsonplaceholder.typicode.com/users';
   
-  // const navigate = useNavigate();
-  // const goToUser = (id) => {
-  //   navigate(`/users/${id}`);
-  // }
+  const users = useFetch(link);
 
   return (
-    <div className="users">
-      {users.map(el=><NavLink to={`/users/${el.id}`}>{el.name}</NavLink>)}
+    <div className={classes.users}>
+      {users.map(el=><NavLink className={classes.link} to={`/users/${el.id}`}>{el.name}</NavLink>)}
     </div>
   );
 }

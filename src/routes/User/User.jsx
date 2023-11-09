@@ -1,31 +1,47 @@
-import { useParams } from "react-router-dom";
-import { useFetch } from "../../useFetch";
-import { NavLink } from "react-router-dom";
+import { Await, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classes from "./User.module.css";
+import { Suspense } from "react";
 
 function User() {
-    const {id} = useParams();
-    
-    const userLink = `https://jsonplaceholder.typicode.com/users/${id}`;
-    const albumsLink = `https://jsonplaceholder.typicode.com/albums`; 
-
-    const user = useFetch(userLink);
-    const albums = useFetch(albumsLink);
+    const { userPromise, userAlbumsPromise } = useLoaderData();
 
     return (
         <div className={classes.user}>
-            <h2>{user.name}</h2>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Await resolve={userPromise}>
+                    {(user) => (
+                        <div>    
+                            <h2>{user.name}</h2>
             
-            <ul className={classes.userInfo}>
-                <li>Username: {user.username}</li>
-                <li>Email: {user.email}</li>
-                <li>Phone: {user.phone}</li>
-                <li>Site: {user.website}</li>
-            </ul>
+                            <ul className={classes.userInfo}>
+                                <li>Username: {user.username}</li>
+                                <li>Email: {user.email}</li>
+                                <li>Phone: {user.phone}</li>
+                                <li>Site: {user.website}</li>
+                            </ul>
+                        </div>    
+                    )}
+                </Await>
+            </Suspense>
 
             <h2>Albums</h2>
 
-            {albums.filter(el=>el.userId === +id).map(el=><li><NavLink className={classes.link} to={`/albums/${el.id}`}>{el.title}</NavLink></li>)}
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <Await resolve = {userAlbumsPromise}>
+                    {(albums) => (
+                        <ul className={classes.albums}>
+                          {albums.map(el =>
+                            <li>
+                              <Link className={classes.link} to={`/albums/${el.id}`}>
+                                {el.title}
+                              </Link>
+                            </li>
+                          )}
+                        </ul>
+                    )}  
+                </Await>
+            </Suspense>                
         </div>
     );
 }

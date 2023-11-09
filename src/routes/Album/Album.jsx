@@ -1,27 +1,37 @@
-import { useParams } from "react-router-dom";
-import { useFetch } from "../../useFetch";
-import { NavLink } from "react-router-dom";
+import { Link, useLoaderData, Await } from "react-router-dom";
 import classes from "./Album.module.css";
+import { Suspense } from "react";
 
-function Album() {
-    const {id} = useParams();
-    
-    const photosLink = `https://jsonplaceholder.typicode.com/photos`; 
-    const photos = useFetch(photosLink);
-
-    const albumLink = `https://jsonplaceholder.typicode.com/albums/${id}`;
-    const album = useFetch(albumLink);
-
-    const userLink = `https://jsonplaceholder.typicode.com/users/${album.userId}`;
-    const user = useFetch(userLink);
+function Album() {    
+    const { albumPromise, userPromise, photosPromise } = useLoaderData();
 
     return (
         <div className={classes.album}>
-            <h2>{album.title}</h2>
-            Created by: <NavLink className={classes.link} to={`/users/${album.userId}`}>{user.name}</NavLink>
-            <div className={classes.photos}>
-                {photos.filter(el=>el.albumId === +id).map(el=><img src={el.url} alt="" />)}
-            </div>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve = {albumPromise}> 
+                    {
+                        (album) => <h2>{album.title}</h2>
+                    }
+                </Await>
+            </Suspense>
+            
+            <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve={userPromise}>
+                    {
+                        (user) => <span>Created by: <Link className={classes.link} to={`/users/${user.id}`}>{user.name}</Link></span>
+                    }
+                </Await>
+            </Suspense>
+
+            <Suspense fallback={<div>Loading...</div>}>
+                <Await resolve = {photosPromise}> 
+                    {(photos) => (
+                        <div className={classes.photos}>
+                            {photos.map(el=><img src={el.url} alt="" />)}
+                        </div>
+                    )}
+                </Await>
+            </Suspense>
         </div>
     );
 }

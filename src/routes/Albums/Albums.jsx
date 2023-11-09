@@ -1,16 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { Link, useLoaderData, Await } from "react-router-dom";
 import classes from "./Albums.module.css";
-import { useFetch } from "../../useFetch";
+import { Suspense } from "react";
 
 function Albums() {
-  const link = 'https://jsonplaceholder.typicode.com/albums';
-  
-  const albums = useFetch(link);
+  const { albumsPromise } = useLoaderData();
   
   return (
-    <ul className={classes.albums}>
-      {albums.map(el=><li><NavLink className={classes.link} to={`/albums/${el.id}`}>{el.title}</NavLink></li>)}
-    </ul>
+    <Suspense fallback={<h1>Loading...</h1>}>
+      <Await resolve = {albumsPromise}>
+        {(albums) => (
+            <ul className={classes.albums}>
+              {albums.map(el =>
+                <li>
+                  <Link className={classes.link} to={`/albums/${el.id}`}>
+                    {el.title}
+                  </Link>
+                </li>
+              )}
+            </ul>
+          )}  
+      </Await>
+    </Suspense>
   );
 }
 

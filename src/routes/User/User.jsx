@@ -39,7 +39,7 @@ function User() {
                         </ul>
                     )}  
                 </Await>
-            </Suspense>                
+            </Suspense>
         </div>
     );
 }

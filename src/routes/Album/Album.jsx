@@ -7,7 +7,7 @@ function Album() {
 
     return (
         <div className={classes.album}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<h1>Loading...</h1>}>
                 <Await resolve = {albumPromise}> 
                     {
                         (album) => <h2>{album.title}</h2>

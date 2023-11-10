@@ -23,11 +23,9 @@ function User() {
                         </div>    
                     )}
                 </Await>
-            </Suspense>
 
-            <h2>Albums</h2>
+                <h2>Albums</h2>
 
-            <Suspense fallback={<h1>Loading...</h1>}>
                 <Await resolve = {userAlbumsPromise}>
                     {(albums) => (
                         <ul className={classes.albums}>

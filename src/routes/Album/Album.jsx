@@ -13,17 +13,13 @@ function Album() {
                         (album) => <h2>{album.title}</h2>
                     }
                 </Await>
-            </Suspense>
-            
-            <Suspense fallback={<div>Loading...</div>}>
+                
                 <Await resolve={userPromise}>
                     {
                         (user) => <span>Created by: <Link className={classes.link} to={`/users/${user.id}`}>{user.name}</Link></span>
                     }
                 </Await>
-            </Suspense>
-
-            <Suspense fallback={<div>Loading...</div>}>
+                
                 <Await resolve = {photosPromise}> 
                     {(photos) => (
                         <div className={classes.photos}>

@@ -1,5 +1,5 @@
 export const albumsLoader = async () => {
-    const albumsPromise = await fetch('https://jsonplaceholder.typicode.com/albums')
-    .then(r => r.json())
+    const albumsPromise = fetch('https://jsonplaceholder.typicode.com/albums')
+      .then(r => r.json())
     return { albumsPromise };
   }

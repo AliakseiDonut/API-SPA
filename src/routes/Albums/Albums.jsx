@@ -12,7 +12,7 @@ function Albums() {
             <ul className={classes.albums}>
               {albums.map(el =>
                 <li>
-                  <Link className={classes.link} to={`/albums/${el.id}`}>
+                  <Link key={el.id} className={classes.link} to={`/albums/${el.id}`}>
                     {el.title}
                   </Link>
                 </li>

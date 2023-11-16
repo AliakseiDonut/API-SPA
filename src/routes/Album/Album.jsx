@@ -23,7 +23,7 @@ function Album() {
                 <Await resolve = {photosPromise}> 
                     {(photos) => (
                         <div className={classes.photos}>
-                            {photos.map(el=><img src={el.url} alt="" />)}
+                            {photos.map(el=><img key={el.id} src={el.url} alt="" />)}
                         </div>
                     )}
                 </Await>

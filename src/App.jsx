@@ -19,22 +19,26 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Users />,
-        loader: usersLoader
+        loader: usersLoader,
+        errorElement: <NotFound />
       },
       {
         path: '/albums',
         element: <Albums />,
-        loader: albumsLoader
+        loader: albumsLoader,
+        errorElement: <NotFound />
       },
       {
         path: '/users/:id',
         element: <User />,
-        loader: userLoader
+        loader: userLoader,
+        errorElement: <NotFound />
       },
       {
         path: '/albums/:id',
         element: <Album />,
-        loader: albumLoader
+        loader: albumLoader,
+        errorElement: <NotFound />
       }
     ]
   },

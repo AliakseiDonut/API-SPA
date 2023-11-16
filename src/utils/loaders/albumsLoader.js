@@ -1,6 +1,10 @@
 export const albumsLoader = () => {
   const albumsPromise = fetch('https://jsonplaceholder.typicode.com/albums')
-    .then(r => r.json())
-    .catch(e => console.log(e))
+    .then(r => {
+      if(!r.ok){
+          throw new Error()
+      } 
+      return r.json()
+    })
   return { albumsPromise };
 }

@@ -11,7 +11,7 @@ function Users() {
         {(users) => (
             <div className={classes.users}>
               {users.map(el =>
-                <Link className={classes.link} to={`/users/${el.id}`}>
+                <Link key={el.id} className={classes.link} to={`/users/${el.id}`}>
                   {el.name}
                 </Link>
                 )}
